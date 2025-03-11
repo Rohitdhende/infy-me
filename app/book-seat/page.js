@@ -9,6 +9,7 @@ import Dropdown from "../components/Dropdown";
 import Checkbox from "@mui/material/Checkbox";
 import Header from "../components/Header";
 import SeatBookCard from "../components/SeatBookCard";
+import { Button } from "@mui/material";
 
 const Login = () => {
   const [date, setDate] = React.useState("12-Mar-2025");
@@ -170,12 +171,54 @@ const Login = () => {
             variant="body1"
             color="grey"
             fontWeight="bold"
-            sx={{ mt: "10px", fontSize: "10px" }}
+            sx={{ mt: "10px", fontSize: "12px" }}
           >
             Are you willing to disclose that you are in office so that
             colleagues, can know for better collaboration. You can change this
             while booking next time or rebooking.
           </Typography>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 1.5,
+          }}
+        >
+          <Button
+            variant="contained"
+            sx={{
+              fontSize: "12px",
+              width: "250px",
+              backgroundColor: "black",
+              color: "#fff",
+            }}
+          >
+            CHOOSE SEAT
+          </Button>
+          <Button
+            variant="contained"
+            sx={{
+              fontSize: "12px",
+              width: "250px",
+              backgroundColor: "black",
+              color: "#fff",
+            }}
+          >
+            GET SYSTEM GENERATED SEAT
+          </Button>
+          <Button
+            variant="contained"
+            sx={{
+              fontSize: "12px",
+              width: "250px",
+              backgroundColor: "black",
+              color: "#fff",
+            }}
+          >
+            SEARCH BY CUBICLE ID
+          </Button>
         </Box>
       </Box>
     </Box>

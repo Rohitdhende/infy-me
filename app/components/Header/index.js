@@ -31,7 +31,7 @@ export default function Header() {
           </IconButton>
 
           <Typography variant="h6" component="div">
-            Book Seat
+            BOOK SEAT
           </Typography>
 
           <IconButton

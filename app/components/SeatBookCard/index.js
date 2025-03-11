@@ -8,23 +8,23 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 
 const SeatBookCard = ({ date, seatNumber, location, dc }) => {
   return (
-    <Card sx={{ display: "flex", padding: "10px" }}>
+    <Card sx={{ display: "flex", padding: "12px" }}>
       <Box sx={{ flex: 2 }}>
-        <Typography sx={{ fontSize: "12px" }} fontWeight="bold">
+        <Typography sx={{ fontSize: "14px" }} fontWeight="bold">
           Recent Booking
         </Typography>
 
-        <Typography sx={{ fontSize: "10px" }}>{date}</Typography>
+        <Typography sx={{ fontSize: "12px" }}>{date}</Typography>
 
         <Box>
           <Typography
-            sx={{ fontSize: "12px" }}
+            sx={{ fontSize: "14px" }}
             component="div"
             fontWeight="bold"
           >
             Cubicle: MUM02 01 04 A {seatNumber}
           </Typography>
-          <Typography sx={{ fontSize: "10px" }} component="div">
+          <Typography sx={{ fontSize: "12px" }} component="div">
             {location}, {dc}, SDB01, FLOOR-4, A-Wing
           </Typography>
         </Box>
@@ -41,7 +41,7 @@ const SeatBookCard = ({ date, seatNumber, location, dc }) => {
           variant="outlined"
           color="success"
           sx={{
-            fontSize: "10px",
+            fontSize: "12px",
             borderRadius: "25px",
             padding: "5px 15px",
             fontWeight: 900,
