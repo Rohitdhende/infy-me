@@ -12,7 +12,7 @@ import SeatBookCard from "../components/SeatBookCard";
 import { Button } from "@mui/material";
 
 const Login = () => {
-  const [date, setDate] = React.useState("21-Mar-2025");
+  const [date, setDate] = React.useState("25-Mar-2025");
   const [city, setCity] = React.useState("Mumbai");
   const [dc, setDc] = React.useState("ILMUMBAISTP");
   const [buildingNumber, setBuildingNumber] = React.useState("SDB01");
@@ -21,7 +21,7 @@ const Login = () => {
 
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-  const dateOptions = ["21-Mar-2025", "24-Mar-2025", "25-Mar-2025"];
+  const dateOptions = ["25-Mar-2025", "26-Mar-2025", "27-Mar-2025"];
   const cityOptions = ["Mumbai", "Vikhroli"];
   const dcOptions = ["ILMUMBAISTP", "Vikhroli"];
   const buildOptions = ["SDB01"];
