@@ -12,7 +12,6 @@ import SeatBookCard from "../components/SeatBookCard";
 import { Button } from "@mui/material";
 
 const Login = () => {
-  const [date, setDate] = React.useState("25-Mar-2025");
   const [city, setCity] = React.useState("Mumbai");
   const [dc, setDc] = React.useState("ILMUMBAISTP");
   const [buildingNumber, setBuildingNumber] = React.useState("SDB01");
@@ -21,12 +20,51 @@ const Login = () => {
 
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-  const dateOptions = ["25-Mar-2025", "26-Mar-2025", "27-Mar-2025"];
+  // const dateOptions = ["04-Apr-2025", "07-Apr-2025", "08-Apr-2025"];()
   const cityOptions = ["Mumbai", "Vikhroli"];
   const dcOptions = ["ILMUMBAISTP", "Vikhroli"];
   const buildOptions = ["SDB01"];
   const floorOptions = ["FLOOR-4"];
   const wingOptions = ["A"];
+  const randomNumber = () => {
+    return Math.floor(Math.random() * 500) + 1;
+  };
+  const getNextWeekdays = () => {
+    if (typeof window !== "undefined") {
+      const weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+      // Helper function to format the date as "dd-mmm-yyyy"
+      function formatDate(date) {
+        const options = { year: "numeric", month: "short", day: "numeric" };
+        return date
+          .toLocaleDateString("en-GB", options)
+          .replace(",", "")
+          .replace(/ /g, "-");
+      }
+
+      const result = [];
+      let currentDate = new Date();
+      let count = 0;
+
+      // Loop until we have 3 weekdays
+      while (count < 3) {
+        // If the day is not Saturday or Sunday, add it to the result
+        if (currentDate.getDay() !== 6 && currentDate.getDay() !== 0) {
+          result.push(formatDate(currentDate));
+          count++;
+        }
+        // Move to the next day
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
+
+      return result;
+    }
+  };
+  const dateOptions = getNextWeekdays();
+  const [date, setDate] = React.useState(
+    dateOptions?.length > 0 ? dateOptions[0] : []
+  );
+  console.log("rsd", getNextWeekdays());
 
   const handleChange = (event) => {
     setDate(event.target.value);
@@ -83,8 +121,8 @@ const Login = () => {
         }}
       >
         <SeatBookCard
-          date="12-Mar-2025"
-          seatNumber={"365"}
+          date={date}
+          seatNumber={randomNumber()}
           location={city}
           dc={dc}
         />
