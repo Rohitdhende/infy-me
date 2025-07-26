@@ -6,7 +6,7 @@ import Card from "@mui/material/Card";
 import IconButton from "@mui/material/IconButton";
 import MoreIcon from "@mui/icons-material/MoreVert";
 
-const SeatBookCard = ({ date, seatNumber, location, dc }) => {
+const SeatBookCard = ({ date, seatNumber, location, dc, floor }) => {
   return (
     <Card sx={{ display: "flex", padding: "12px" }}>
       <Box sx={{ flex: 2 }}>
@@ -25,7 +25,7 @@ const SeatBookCard = ({ date, seatNumber, location, dc }) => {
             Cubicle: MUM02 01 04 A {seatNumber}
           </Typography>
           <Typography sx={{ fontSize: "12px" }} component="div">
-            {location}, {dc}, SDB01, FLOOR-4, A-Wing
+            {location}, {dc}, SDB01, {floor}, A-Wing
           </Typography>
         </Box>
       </Box>

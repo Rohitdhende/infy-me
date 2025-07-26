@@ -12,7 +12,7 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   alignItems: "center",
   justifyContent: "space-between",
-  backgroundColor: "#7F00FF",
+  backgroundColor: "#D500F9",
 }));
 
 export default function Header() {

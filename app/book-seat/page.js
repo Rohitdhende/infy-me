@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import RadioG from "../components/Radio";
@@ -11,11 +11,36 @@ import Header from "../components/Header";
 import SeatBookCard from "../components/SeatBookCard";
 import { Button } from "@mui/material";
 
+function getNextWeekdays() {
+  const weekdays = [];
+
+  function formatDate(date) {
+    const options = { year: "numeric", month: "short", day: "numeric" };
+    return date
+      .toLocaleDateString("en-GB", options)
+      .replace(",", "")
+      .replace(/ /g, "-");
+  }
+
+  let currentDate = new Date();
+  let count = 0;
+
+  while (count < 3) {
+    if (currentDate.getDay() !== 6 && currentDate.getDay() !== 0) {
+      weekdays.push(formatDate(currentDate));
+      count++;
+    }
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+
+  return weekdays;
+}
+
 const Login = () => {
   const [city, setCity] = React.useState("Mumbai");
   const [dc, setDc] = React.useState("ILMUMBAISTP");
   const [buildingNumber, setBuildingNumber] = React.useState("SDB01");
-  const [floor, setFloor] = React.useState("FLOOR-4");
+  const [floor, setFloor] = React.useState("SLOT-2, 2PM-7PM");
   const [wing, setWing] = React.useState("A");
 
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
@@ -24,47 +49,29 @@ const Login = () => {
   const cityOptions = ["Mumbai", "Vikhroli"];
   const dcOptions = ["ILMUMBAISTP", "Vikhroli"];
   const buildOptions = ["SDB01"];
-  const floorOptions = ["FLOOR-4"];
+  const floorOptions = [
+    "SLOT-1, 8M-1PM",
+    "SLOT-3, FULL-DAY",
+    "SLOT-2, 2PM-7PM",
+  ];
   const wingOptions = ["A"];
   const randomNumber = () => {
     return Math.floor(Math.random() * 500) + 1;
   };
-  const getNextWeekdays = () => {
-    if (typeof window !== "undefined") {
-      const weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
-      // Helper function to format the date as "dd-mmm-yyyy"
-      function formatDate(date) {
-        const options = { year: "numeric", month: "short", day: "numeric" };
-        return date
-          .toLocaleDateString("en-GB", options)
-          .replace(",", "")
-          .replace(/ /g, "-");
-      }
+  const [dateOptions, setDateOptions] = useState([]);
+  const [seatNumber, setSeatNumber] = useState(null);
+  useEffect(() => {
+    const weekdays = getNextWeekdays();
+    setDateOptions(weekdays);
+    setDate(weekdays[0]);
 
-      const result = [];
-      let currentDate = new Date();
-      let count = 0;
+    setSeatNumber(randomNumber());
+  }, []);
 
-      // Loop until we have 3 weekdays
-      while (count < 3) {
-        // If the day is not Saturday or Sunday, add it to the result
-        if (currentDate.getDay() !== 6 && currentDate.getDay() !== 0) {
-          result.push(formatDate(currentDate));
-          count++;
-        }
-        // Move to the next day
-        currentDate.setDate(currentDate.getDate() + 1);
-      }
-
-      return result;
-    }
-  };
-  const dateOptions = getNextWeekdays();
   const [date, setDate] = React.useState(
     dateOptions?.length > 0 ? dateOptions[0] : []
   );
-  console.log("rsd", getNextWeekdays());
 
   const handleChange = (event) => {
     setDate(event.target.value);
@@ -109,6 +116,17 @@ const Login = () => {
     console.log("www", event.target.value);
     setAllocation(event.target.value);
   };
+
+  const newDate = new Date(date);
+  newDate.setDate(newDate.getDate() + 1);
+  const formatedOnePlusDate = newDate
+    .toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    })
+    .replace(/ /g, "-");
+
   return (
     <Box>
       <Header />
@@ -122,15 +140,16 @@ const Login = () => {
       >
         <SeatBookCard
           date={date}
-          seatNumber={randomNumber()}
+          seatNumber={seatNumber}
           location={city}
           dc={dc}
+          floor={floor}
         />
         <Box>
           <Typography>Provide your DC and building preferences</Typography>
           <Dropdown
             label="Date"
-            value={date}
+            value={formatedOnePlusDate}
             handleChange={handleChange}
             options={dateOptions}
           />
